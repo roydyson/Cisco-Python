@@ -1,0 +1,772 @@
+
+++++++++++++++++++++++++++++++++++++
+s product immediately.
+
+A summary of U.S. laws governing Cisco cryptographic products may be found at:
+http://www.cisco.com/wwl/export/crypto/tool/stqrg.html
+
+If you require further assistance please contact us by sending email to
+export@cisco.com.
+
+Cisco IOSv (revision 1.0) with  with 460033K/62464K bytes of memory.
+Processor board ID 9NOY5E0VF6G1IOBF7S58B
+4 Gigabit Ethernet interfaces
+DRAM configuration is 72 bits wide with parity disabled.
+256K bytes of non-volatile configuration memory.
+2097152K bytes of ATA System CompactFlash 0 (Read/Write)
+0K bytes of ATA CompactFlash 1 (Read/Write)
+0K bytes of ATA CompactFlash 2 (Read/Write)
+10080K bytes of ATA CompactFlash 3 (Read/Write)
+
+
+
+Configuration register is 0x0
+
+BRN-RTR-01#########################################################
+BRN-RTR-01#show int description
+Interface                      Status         Protocol Description
+Gi0/0                          up             up       OOB Management
+Gi0/1                          up             up       to MPLS
+Gi0/2                          up             up       to BRN-ASW-01
+Gi0/3                          up             up       to ISP-A
+Lo0                            up             up       Loopback
+BRN-RTR-01#########################################################
+BRN-RTR-01#show run
+Building configuration...
+
+  
+Current configuration : 5289 bytes
+!
+! Last configuration change at 04:10:43 UTC Thu Apr 25 2019
+!
+version 15.6
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname BRN-RTR-01
+!
+boot-start-marker
+boot-end-marker
+!
+!
+vrf definition Mgmt-intf
+ !
+ address-family ipv4
+ exit-address-family
+ !
+ address-family ipv6
+ exit-address-family
+!
+enable password cisco
+!
+no aaa new-model
+!
+!
+!
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+no ip domain lookup
+ip domain name virl.info
+ip cef
+ipv6 unicast-routing
+ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+crypto pki trustpoint TP-self-signed-4294967295
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-4294967295
+ revocation-check none
+ rsakeypair TP-self-signed-4294967295
+!
+!
+crypto pki certificate chain TP-self-signed-4294967295
+ certificate self-signed 01
+  3082022B 30820194 A0030201 02020101 300D0609 2A864886 F70D0101 05050030 
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 34323934 39363732 3935301E 170D3139 30343235 30343133 
+  30325A17 0D323030 31303130 30303030 305A3031 312F302D 06035504 03132649 
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D34 32393439 
+  36373239 3530819F 300D0609 2A864886 F70D0101 01050003 818D0030 81890281 
+  8100BC64 2293CAF5 F02E8572 9A601917 AFBB9753 B5CC670B 26213ED7 B609E03D 
+  E6B9425D E99533D7 87618F92 509644D0 FD96215C 056629CD C9B4E579 42917411 
+  BE649D34 D03651C4 89892DEC 25026C1F 874466B9 E554D87B E326B6AF 38A05392 
+  B42221A4 07EC5EB3 45205260 65A8776F 93DFCA78 9EE619C9 63FA058C 46ED88AE 
+  3F730203 010001A3 53305130 0F060355 1D130101 FF040530 030101FF 301F0603 
+  551D2304 18301680 14A26753 87E6807D 05B498E8 E613B8AE D6281D1E 42301D06 
+  03551D0E 04160414 A2675387 E6807D05 B498E8E6 13B8AED6 281D1E42 300D0609 
+  2A864886 F70D0101 05050003 81810056 B2987DEF 4A0EDC77 44BFD515 C27A7E9B 
+  1F6477F5 0147960F 7BCC99E2 22600F57 5FC37920 44B10FD0 5870DED8 83F652FC 
+  94DB15D8 EA48E846 9C04DC75 70786EA0 B0A99367 89A50D9A BDBB37E6 DF2D44BB 
+  554A8F37 8F97EA6E 35A73315 69E15CAC EF50D69B 792A8909 EF420594 0B4B202D 
+  439AB1A6 55587AFE 6A509766 AEBE91
+  	quit
+username cisco privilege 15 secret 5 $1$H32f$YW63vTQpYljbtSswa5C5k/
+!
+redundancy
+!
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ description Loopback
+ no ip address
+!
+interface GigabitEthernet0/0
+ description OOB Management
+ vrf forwarding Mgmt-intf
+ ip address 172.16.1.19 255.255.255.0
+ duplex full
+ speed auto
+ media-type rj45
+!
+interface GigabitEthernet0/1
+ description to MPLS
+ no ip address
+ duplex full
+ speed auto
+ media-type rj45
+!
+interface GigabitEthernet0/2
+ description to BRN-ASW-01
+ no ip address
+ duplex full
+ speed auto
+ media-type rj45
+!
+interface GigabitEthernet0/3
+ description to ISP-A
+ no ip address
+ duplex full
+ speed auto
+ media-type rj45
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+ip ssh server algorithm authentication password
+ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+!
+ipv6 ioam timestamp
+!
+!
+!
+control-plane
+!
+banner exec ^C
+**************************************************************************
+* IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+* education. IOSv is provided as-is and is not supported by Cisco's      *
+* Technical Advisory Center. Any use or disclosure, in whole or in part, *
+* of the IOSv Software or Documentation to any third party for any       *
+* purposes is expressly prohibited except as otherwise authorized by     *
+* Cisco in writing.                                                      *
+**************************************************************************^C
+banner incoming ^C
+**************************************************************************
+* IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+* education. IOSv is provided as-is and is not supported by Cisco's      *
+* Technical Advisory Center. Any use or disclosure, in whole or in part, *
+* of the IOSv Software or Documentation to any third party for any       *
+* purposes is expressly prohibited except as otherwise authorized by     *
+* Cisco in writing.                                                      *
+**************************************************************************^C
+banner login ^C
+**************************************************************************
+* IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+* education. IOSv is provided as-is and is not supported by Cisco's      *
+* Technical Advisory Center. Any use or disclosure, in whole or in part, *
+* of the IOSv Software or Documentation to any third party for any       *
+* purposes is expressly prohibited except as otherwise authorized by     *
+* Cisco in writing.                                                      *
+**************************************************************************^C
+!
+line con 0
+ password cisco
+line aux 0
+line vty 0 4
+ exec-timeout 720 0
+ password cisco
+ login local
+ transport input telnet ssh
+!
+no scheduler allocate
+onep
+ tls
+  trustpoint server-identity TP-self-signed-4294967295
+ service set vty
+!
+end
+
+BRN-RTR-01#########################################################
+BRN-RTR-01#show clock
+*15:33:05.857 UTC Thu Apr 25 2019
+BRN-RTR-01#########################################################
+BRN-RTR-01#show ip route
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area 
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route, H - NHRP, l - LISP
+       a - application route
+       + - replicated route, % - next hop override, p - overrides from PfR
+
+Gateway of last resort is not set
+
+BRN-RTR-01#########################################################
+BRN-RTR-01#show ntp asso
+BRN-RTR-01#########################################################
+BRN-RTR-01#show platform
+Cisco IOS Software, IOSv Software (VIOS-ADVENTERPRISEK9-M), Version 15.6(3)M2, RELEASE SOFTWARE (fc2)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2017 by Cisco Systems, Inc.
+Compiled Wed 29-Mar-17 14:05 by prod_rel_team
+
+Disk: flash0: 16 heads, 4161 cylinders, 512 sector size
+  Device    Boot Sec/Cl StartS  EndS         System
+  fatdisk    *     8    63      4193279 FAT32 LBA(12) 1.99GB
+
+  Total size 1.99GB, 2146927104 bytes, sectors 4193217
+
+GRUB multiboot info:
+  IOMEM percent       '25'
+  Boot loader         'GRUB 2.00'
+  Command line        '/vios-adventerprisek9-m'
+  Memory size         510Mb, low 639K, high 523136K
+  Multiboot info      0x068C6270, flags 0x00001A47
+  Boot device         0x8000FFFF
+  Memory map          0x068C64CE (168 bytes)
+    0x00000000 .. 0x0009FBFF (     639K, available)
+    0x0009FC00 .. 0x0009FFFF (       1K, reserved)
+    0x000F0000 .. 0x000FFFFF (      64K, reserved)
+    0x00100000 .. 0x1FFDFFFF (  523136K, available)
+    0x1FFE0000 .. 0x1FFFFFFF (     128K, reserved)
+    0xFEFFC000 .. 0xFEFFFFFF (      16K, reserved)
+    0xFFFC0000 .. 0xFFFFFFFF (     256K, reserved)
+Linker:
+  _initdata_start     0x7C35BF0
+  _data1_start        0x89EA360
+  _initdata_end       0x89EA35C
+
+Router memory: 510Mb, 535036928 bytes
+
+Program counter profiling:
+
+      PC             Invoked
+  ----------------------------------
+
+Interrupt service routine profiling:
+
+  IOAPIC IntCaught IntBlockd      TotalCycle   AvgCycles Name
+  ------------------------------------------------------------------
+
+Probes profiling:
+
+     Invoked     TotalCycle      AvgCycles Caller PC / Name
+  ---------------------------------------------------------------------
+    68976550  5470666106015          79311 0x002876E1/ISR raise level
+    68976409 11313204024972         164015 0x00287749/ISR reset level
+         119       44244810         371805 0x00277254/ISR set level
+    41009173   122404238416           2984 0x0015AC9F/PIC 0 (timer)
+    41009173    74470470404           1815 0x0015A0D5/PC ISR clock tick
+           2     2553911701     1276955850 0x0021FFEA/Buffer init
+           1    53175728963    53175728963 0x001592EE/Filesys pre init
+           3    33718641031    11239547010 0x001613DA/PCI discover
+       41681   113165819399        2715045 0x00162695/VirtIO req
+      380893      328883754            863 0x00162F34/VirtIO ring alloc
+       41681   109812055104        2634583 0x0016314A/VirtIO ring write
+       41681   109752429839        2633152 0x001658B8/VirtIO ring write done
+       41681  1609061940564       38604206 0x001627B6/VirtIO queue read
+       41681  1456503148683       34944054 0x001627B6/VirtIO queue read wait
+       41681   152507689800        3658925 0x00165B57/VirtIO ring read done
+      100754  1099611630909       10913826 0x0015B79F/PIC 11 (pci)
+           1    22415502293    22415502293 0x0112A50C/PD interface init
+           1    33788142354    33788142354 0x03DE2590/Interface init
+           1       50488337       50488337 0x0112A82D/Filesys init
+       11223    90257316950        8042173 0x0015B69F/PIC 10 (pci)
+           1      201302387      201302387 0x0112A6F9/Line init
+      401559   319425301513         795462 0x03DEADD0/AUX/CON poller
+      401559   158142826344         393822 0x0013196D/TTY read
+           1  2076311836987  2076311836987 0x03DEADD0/Code sign
+         354     9239635982       26100666 0x0013196D/TTY read thre
+         676    11235211546       16620135 0x0015BB9F/PIC 15 (harddisk)
+           1    11884274085    11884274085 0x011E3941/E1000 BIA record
+      366432  2057847535573        5615905 0x03DEADD0/e1000 sw poller
+      941878              0              0 0x00000000/VIRTIO ack
+          15       61640715        4109381 0x0015ED7F/PC profiling
+
+% CPU profiling needs to be enabled via;
+    'test platform profile start'
+
+CPU information:
+  Running at 5320 ticks per millisecond
+  Watchdog is not present
+
+CPU capabilities:
+      Supported,  MSR (Model Specific Register)
+      Supported,  APIC (Advanced Programmable Interrupt Controller)
+      Supported,  SSE3
+  NOT supported,  PCL-MUL
+  NOT supported,  DTES-64
+  NOT supported,  MONITOR
+  NOT supported,  DS CPL
+      Supported,  VMX
+  NOT supported,  SMX
+  NOT supported,  EST
+  NOT supported,  TM2
+  NOT supported,  SSSE3
+  NOT supported,  CID
+  NOT supported,  FMA
+      Supported,  CX16
+  NOT supported,  ETPRD
+  NOT supported,  PDCM
+  NOT supported,  DCA
+  NOT supported,  SSE4.1
+  NOT supported,  SSE4.2
+      Supported,  X2-APIC
+  NOT supported,  MOVBE
+  NOT supported,  POP-CNT
+  NOT supported,  AES
+  NOT supported,  X-SAVE
+  NOT supported,  OSX-SAVE
+  NOT supported,  AVX
+      Supported,  FPU
+  NOT supported,  VME
+      Supported,  DE
+      Supported,  PSE
+      Supported,  TSC
+      Supported,  PAE
+      Supported,  MCE
+      Supported,  CX8
+      Supported,  SEP
+      Supported,  MTRR
+      Supported,  PGE
+      Supported,  MCA
+      Supported,  CMOV
+      Supported,  PAT
+      Supported,  PSE36
+  NOT supported,  PSN
+      Supported,  CLF
+  NOT supported,  DTES
+  NOT supported,  ACPI
+      Supported,  MMX
+      Supported,  FXSR
+      Supported,  SSE
+      Supported,  SSE2
+  NOT supported,  SS
+  NOT supported,  HTT
+  NOT supported,  TM1
+  NOT supported,  IA-64
+  NOT supported,  PBE
+
+CPU controllers:
+  APIC: base FEE00900, ID 0
+    Physical ID                              Offset 0x020/32, raw data: 00000000
+      APIC ID                                  00000000 (0)
+    Version                                  Offset 0x030/48, raw data: 01050014
+      Version                                  00000014 (20)
+      Reserved                                 00000000 (0)
+      Lvt Count                                00000005 (5)
+      Reserved                                 00000001 (1)
+      Reserved                                 01050014 (17104916)
+      Reserved                                 01050014 (17104916)
+      Reserved                                 01050014 (17104916)
+    TPR (Task Priority Register)             Offset 0x080/128, raw data: 00000000
+      Priority                                 00000000 (0)
+    APR (Arbitration priority register)      Offset 0x090/144, raw data: 00000000
+      Priority                                 00000000 (0)
+    PPR (Processor Priority Register)        Offset 0x0A0/160, raw data: 00000000
+      Priority                                 00000000 (0)
+    EOI (End of Interrupt Register)          Offset 0x0B0/176, raw data: 00000000
+      EOI                                      00000000 (0)
+    LDR (Logical Destination Register)       Offset 0x0D0/208, raw data: 00000000
+      Logical Dest                             00000000 (0)
+    DFR (Destination Format Register)        Offset 0x0E0/224, raw data: FFFFFFFF
+      Model                                    0000000F (15)
+    SVR (Spurious Vector Register)           Offset 0x0F0/240, raw data: 000001FF
+      Spurious Vector                          000000FF (255)
+      APIC Enabled                             00000001 (1)
+      CPU                                      00000000 (0)
+      Reserved                                 00000000 (0)
+      Reserved                                 000001FF (511)
+      Reserved                                 000001FF (511)
+      Reserved                                 000001FF (511)
+    ISR (In-service Register)                Offset 0x100/256, raw data: 00000000
+      [0] bitfield                             00000000 (0)
+      [1] bitfield                             00000000 (0)
+      [2] bitfield                             00000000 (0)
+      [3] bitfield                             00000000 (0)
+      [4] bitfield                             00000000 (0)
+      [5] bitfield                             00000000 (0)
+      [6] bitfield                             00000000 (0)
+      [7] bitfield                             00000000 (0)
+    TMR (Trigger Mode Register)              Offset 0x180/384, raw data: 00000000
+      [0] bitfield                             00000000 (0)
+      [1] bitfield                             00000000 (0)
+      [2] bitfield                             00000000 (0)
+      [3] bitfield                             00000000 (0)
+      [4] bitfield                             00000000 (0)
+      [5] bitfield                             00000000 (0)
+      [6] bitfield                             00000000 (0)
+      [7] bitfield                             00000000 (0)
+    IRR (Interrupt Request Register)         Offset 0x200/512, raw data: 00000000
+      [0] bitfield                             00000000 (0)
+      [1] bitfield                             00000000 (0)
+      [2] bitfield                             00000000 (0)
+      [3] bitfield                             00000000 (0)
+      [4] bitfield                             00000000 (0)
+      [5] bitfield                             00000000 (0)
+      [6] bitfield                             00000000 (0)
+      [7] bitfield                             00000000 (0)
+    ESR (Error Status Register)              Offset 0x280/640, raw data: 00000000
+      Send                                     00000000 (0)
+      Receive                                  00000000 (0)
+      Send Accept                              00000000 (0)
+      Receive Accept                           00000000 (0)
+      Send Illegal                             00000000 (0)
+      Receive Illegal Vector                   00000000 (0)
+      Illegal Reg Address                      00000000 (0)
+      Errors                                   00000000 (0)
+    ICR1 (Interrupt Command Register)        Offset 0x300/768, raw data: 000C4610
+      Int Vector                               00000010 (16)
+      Delivery Mode                            00000006 (6)
+      Destination Mode                         00000000 (0)
+      Delivery Status                          00000000 (0)
+      Reserved                                 00000000 (0)
+      Level                                    00000001 (1)
+      Trigger                                  00000000 (0)
+      Reserved                                 00000000 (0)
+      Shorthand                                00000003 (3)
+      Reserved                                 00000000 (0)
+    ICR2 (Interrupt Command Register)        Offset 0x310/784, raw data: 00000000
+      destination                              00000000 (0)
+    Level Trigger Timer                      Offset 0x320/800, raw data: 00010000
+      Int Vector                               00000000 (0)
+      Delivery Status                          00000000 (0)
+      Mask                                     00000001 (1)
+      Timer Mode                               00000000 (0)
+    Level Trigger Thermal                    Offset 0x330/816, raw data: 00010000
+      Int Vector                               00000000 (0)
+      Delivery Mode                            00000000 (0)
+      Delivery Status                          00000000 (0)
+      Mask                                     00000001 (1)
+    Level Trigger PC                         Offset 0x340/832, raw data: 00010000
+      Interrupt Vector                         00000000 (0)
+      Delivery Mode                            00000000 (0)
+      Delivery Status                          00000000 (0)
+    Level Trigger LINT0                      Offset 0x350/848, raw data: 00008700
+      Interrupt Vector                         00000000 (0)
+      Delivery Mode (ExtInt)                   00000007 (7)
+      Reserved                                 00000000 (0)
+      Delivery Status                          00000000 (0)
+      Polarity                                 00000000 (0)
+      Remote IRR                               00000000 (0)
+      Trigger (Level)                          00000001 (1)
+      Mask                                     00000000 (0)
+      Reserved                                 00000000 (0)
+    Level Trigger LINT1                      Offset 0x360/864, raw data: 00008400
+      Interrupt Vector                         00000000 (0)
+      Delivery Mode (NMI)                      00000004 (4)
+      Reserved                                 00000000 (0)
+      Delivery Status                          00000000 (0)
+      polarity                                 00000000 (0)
+      Remote IRR                               00000000 (0)
+      Trigger (Level)                          00000001 (1)
+      Mask                                     00000000 (0)
+      Reserved                                 00000000 (0)
+    Level Trigger Error                      Offset 0x370/880, raw data: 00010000
+      Interrupt Vector                         00000000 (0)
+      Delivery Status                          00000000 (0)
+      Mask                                     00000001 (1)
+    Timer ICR (Interrupt Command Register)   Offset 0x380/896, raw data: 00000000
+      Initial count                            00000000 (0)
+    Timer CCR (Current Count Register)       Offset 0x390/912, raw data: 00000000
+      Current Count                            00000000 (0)
+    Timer DCR (Divide Config Register)       Offset 0x3E0/992, raw data: 00000000
+      Divisor                                  00000000 (0)
+
+Total physical DRAM 522497K bytes
+
+BRN-RTR-01#########################################################
+BRN-RTR-01#show clock
+*15:33:07.595 UTC Thu Apr 25 2019
+BRN-RTR-01#########################################################
+BRN-RTR-01#dir all-filesystems
+Directory of flash0:/
+
+    1  drw-           0  Jan 30 2013 00:00:00 +00:00  boot
+  264  drw-           0  Oct 14 2013 00:00:00 +00:00  config
+  267  -rw-   147988420  Mar 29 2017 00:00:00 +00:00  vios-adventerprisek9-m
+  268  drw-           0  Apr 25 2019 04:10:38 +00:00  onep
+  270  -rw-      524288  Apr 25 2019 04:10:46 +00:00  nvram
+  271  -rw-          79  Apr 25 2019 04:10:54 +00:00  e1000_bia.txt
+
+2142715904 bytes total (1989586944 bytes free)
+Directory of flash3:/
+
+No files in directory
+
+10192896 bytes total (10192384 bytes free)
+Directory of archive:/
+
+No files in directory
+
+No space information available
+Directory of system:/
+
+    2  -r--           0                    <no date>  default-running-config
+    4  dr-x           0                    <no date>  memory
+    1  -rw-        5289                    <no date>  running-config
+    3  dr-x           0                    <no date>  vfiles
+
+No space information available
+Directory of nvram:/
+
+  249  -rw-        3728                    <no date>  startup-config
+  250  ----        1494                    <no date>  private-config
+    1  ----          41                    <no date>  udi
+    2  ----          23                    <no date>  persistent-data
+
+262144 bytes total (254822 bytes free)
+Directory of tmpsys:/
+
+    6  drw-           0                    <no date>  eem_lib_system
+    5  drw-           0                    <no date>  eem_lib_user
+   18  -rw-           0                    <no date>  eem_pnt_0
+   20  -rw-           0                    <no date>  eem_pnt_1
+   38  -rw-           0                    <no date>  eem_pnt_10
+   40  -rw-           0                    <no date>  eem_pnt_11
+   42  -rw-           0                    <no date>  eem_pnt_12
+   44  -rw-           0                    <no date>  eem_pnt_13
+   46  -rw-           0                    <no date>  eem_pnt_14
+   48  -rw-           0                    <no date>  eem_pnt_15
+   22  -rw-           0                    <no date>  eem_pnt_2
+   24  -rw-           0                    <no date>  eem_pnt_3
+   26  -rw-           0                    <no date>  eem_pnt_4
+   28  -rw-           0                    <no date>  eem_pnt_5
+   30  -rw-           0                    <no date>  eem_pnt_6
+   32  -rw-           0                    <no date>  eem_pnt_7
+   34  -rw-           0                    <no date>  eem_pnt_8
+   36  -rw-           0                    <no date>  eem_pnt_9
+    4  drw-           0                    <no date>  eem_policy
+    8  drw-           0                    <no date>  eem_pub
+   17  -rw-           0                    <no date>  eem_rpc_0
+   19  -rw-           0                    <no date>  eem_rpc_1
+   37  -rw-           0                    <no date>  eem_rpc_10
+   39  -rw-           0                    <no date>  eem_rpc_11
+   41  -rw-           0                    <no date>  eem_rpc_12
+   43  -rw-           0                    <no date>  eem_rpc_13
+   45  -rw-           0                    <no date>  eem_rpc_14
+   47  -rw-           0                    <no date>  eem_rpc_15
+   21  -rw-           0                    <no date>  eem_rpc_2
+   23  -rw-           0                    <no date>  eem_rpc_3
+   25  -rw-           0                    <no date>  eem_rpc_4
+   27  -rw-           0                    <no date>  eem_rpc_5
+   29  -rw-           0                    <no date>  eem_rpc_6
+   31  -rw-           0                    <no date>  eem_rpc_7
+   33  -rw-           0                    <no date>  eem_rpc_8
+   35  -rw-           0                    <no date>  eem_rpc_9
+    7  drw-           0                    <no date>  eem_temp
+    1  dr-x           0                    <no date>  lib
+    9  drw-           0                    <no date>  macro_scripts
+
+No space information available
+BRN-RTR-01#########################################################
+BRN-RTR-01#show vlan
+% Ambiguous command:  "show vlan"
+BRN-RTR-01#########################################################
+BRN-RTR-01#show ip protocols
+*** IP Routing is NSF aware ***
+
+Routing Protocol is "application"
+  Sending updates every 0 seconds
+  Invalid after 0 seconds, hold down 0, flushed after 0
+  Outgoing update filter list for all interfaces is not set
+  Incoming update filter list for all interfaces is not set
+  Maximum path: 32
+  Routing for Networks:
+  Routing Information Sources:
+    Gateway         Distance      Last Update
+  Distance: (default is 4)
+
+BRN-RTR-01#########################################################
+BRN-RTR-01#show interface
+GigabitEthernet0/0 is up, line protocol is up 
+  Hardware is iGbE, address is 5e00.0000.0000 (bia 5e00.0000.0000)
+  Description: OOB Management
+  Internet address is 172.16.1.19/24
+  MTU 1500 bytes, BW 1000000 Kbit/sec, DLY 10 usec, 
+     reliability 247/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, loopback not set
+  Keepalive set (10 sec)
+  Full Duplex, Auto Speed, link type is auto, media type is RJ45
+  output flow-control is unsupported, input flow-control is unsupported
+  ARP type: ARPA, ARP Timeout 04:00:00
+  Last input 00:00:00, output 00:00:00, output hang never
+  Last clearing of "show interface" counters never
+  Input queue: 0/75/0/0 (size/max/drops/flushes); Total output drops: 0
+  Queueing strategy: fifo
+  Output queue: 0/40 (size/max)
+  5 minute input rate 2000 bits/sec, 2 packets/sec
+  5 minute output rate 3000 bits/sec, 3 packets/sec
+     31090 packets input, 5198820 bytes, 0 no buffer
+     Received 1239 broadcasts (0 IP multicasts)
+     8308 runts, 0 giants, 0 throttles 
+     8308 input errors, 0 CRC, 0 frame, 0 overrun, 0 ignored
+     0 watchdog, 0 multicast, 0 pause input
+     32398 packets output, 3838748 bytes, 0 underruns
+     0 output errors, 0 collisions, 3 interface resets
+     6 unknown protocol drops
+     0 babbles, 0 late collision, 0 deferred
+     1 lost carrier, 0 no carrier, 0 pause output
+     0 output buffer failures, 0 output buffers swapped out
+GigabitEthernet0/1 is up, line protocol is up 
+  Hardware is iGbE, address is fa16.3e96.1658 (bia fa16.3e96.1658)
+  Description: to MPLS
+  MTU 1500 bytes, BW 1000000 Kbit/sec, DLY 10 usec, 
+     reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, loopback not set
+  Keepalive set (10 sec)
+  Full Duplex, Auto Speed, link type is auto, media type is RJ45
+  output flow-control is unsupported, input flow-control is unsupported
+  ARP type: ARPA, ARP Timeout 04:00:00
+  Last input 00:00:35, output 00:00:01, output hang never
+  Last clearing of "show interface" counters never
+  Input queue: 0/75/0/0 (size/max/drops/flushes); Total output drops: 0
+  Queueing strategy: fifo
+  Output queue: 0/40 (size/max)
+  5 minute input rate 0 bits/sec, 0 packets/sec
+  5 minute output rate 0 bits/sec, 0 packets/sec
+     734 packets input, 280388 bytes, 0 no buffer
+     Received 0 broadcasts (0 IP multicasts)
+     0 runts, 0 giants, 0 throttles 
+     0 input errors, 0 CRC, 0 frame, 0 overrun, 0 ignored
+     0 watchdog, 0 multicast, 0 pause input
+     4929 packets output, 548472 bytes, 0 underruns
+     0 output errors, 0 collisions, 3 interface resets
+     0 unknown protocol drops
+     0 babbles, 0 late collision, 0 deferred
+     0 lost carrier, 0 no carrier, 0 pause output
+     0 output buffer failures, 0 output buffers swapped out
+GigabitEthernet0/2 is up, line protocol is up 
+  Hardware is iGbE, address is fa16.3e57.9b63 (bia fa16.3e57.9b63)
+  Description: to BRN-ASW-01
+  MTU 1500 bytes, BW 1000000 Kbit/sec, DLY 10 usec, 
+     reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, loopback not set
+  Keepalive set (10 sec)
+  Full Duplex, Auto Speed, link type is auto, media type is RJ45
+  output flow-control is unsupported, input flow-control is unsupported
+  ARP type: ARPA, ARP Timeout 04:00:00
+  Last input 00:00:19, output 00:00:01, output hang never
+  Last clearing of "show interface" counters never
+  Input queue: 0/75/0/0 (size/max/drops/flushes); Total output drops: 0
+  Queueing strategy: fifo
+  Output queue: 0/40 (size/max)
+  5 minute input rate 0 bits/sec, 0 packets/sec
+  5 minute output rate 0 bits/sec, 0 packets/sec
+     608 packets input, 220704 bytes, 0 no buffer
+     Received 0 broadcasts (0 IP multicasts)
+     0 runts, 0 giants, 0 throttles 
+     0 input errors, 0 CRC, 0 frame, 0 overrun, 0 ignored
+     0 watchdog, 0 multicast, 0 pause input
+     4928 packets output, 548084 bytes, 0 underruns
+     0 output errors, 0 collisions, 3 interface resets
+     0 unknown protocol drops
+     0 babbles, 0 late collision, 0 deferred
+     1 lost carrier, 0 no carrier, 0 pause output
+     0 output buffer failures, 0 output buffers swapped out
+GigabitEthernet0/3 is up, line protocol is up 
+  Hardware is iGbE, address is fa16.3e87.714a (bia fa16.3e87.714a)
+  Description: to ISP-A
+  MTU 1500 bytes, BW 1000000 Kbit/sec, DLY 10 usec, 
+     reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, loopback not set
+  Keepalive set (10 sec)
+  Full Duplex, Auto Speed, link type is auto, media type is RJ45
+  output flow-control is unsupported, input flow-control is unsupported
+  ARP type: ARPA, ARP Timeout 04:00:00
+  Last input 00:00:26, output 00:00:01, output hang never
+  Last clearing of "show interface" counters never
+  Input queue: 0/75/0/0 (size/max/drops/flushes); Total output drops: 0
+  Queueing strategy: fifo
+  Output queue: 0/40 (size/max)
+  5 minute input rate 0 bits/sec, 0 packets/sec
+  5 minute output rate 0 bits/sec, 0 packets/sec
+     765 packets input, 292995 bytes, 0 no buffer
+     Received 0 broadcasts (0 IP multicasts)
+     0 runts, 0 giants, 0 throttles 
+     0 input errors, 0 CRC, 0 frame, 0 overrun, 0 ignored
+     0 watchdog, 0 multicast, 0 pause input
+     4935 packets output, 550800 bytes, 0 underruns
+     0 output errors, 0 collisions, 3 interface resets
+     0 unknown protocol drops
+     0 babbles, 0 late collision, 0 deferred
+     0 lost carrier, 0 no carrier, 0 pause output
+     0 output buffer failures, 0 output buffers swapped out
+Loopback0 is up, line protocol is up 
+  Hardware is Loopback
+  Description: Loopback
+  MTU 1514 bytes, BW 8000000 Kbit/sec, DLY 5000 usec, 
+     reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation LOOPBACK, loopback not set
+  Keepalive set (10 sec)
+  Last input never, output never, output hang never
+  Last clearing of "show interface" counters never
+  Input queue: 0/75/0/0 (size/max/drops/flushes); Total output drops: 0
+  Queueing strategy: fifo
+  Output queue: 0/0 (size/max)
+  5 minute input rate 0 bits/sec, 0 packets/sec
+  5 minute output rate 0 bits/sec, 0 packets/sec
+     0 packets input, 0 bytes, 0 no buffer
+     Received 0 broadcasts (0 IP multicasts)
+     0 runts, 0 giants, 0 throttles 
+     0 input errors, 0 CRC, 0 frame, 0 overrun, 0 ignored, 0 abort
+     0 packets output, 0 bytes, 0 underruns
+     0 output errors, 0 collisions, 0 interface resets
+     0 unknown protocol drops
+     0 output buffer failures, 0 output buffers swapped out
+BRN-RTR-01#########################################################
+BRN-RTR-01#show standby brief
+BRN-RTR-01#########################################################
+BRN-RTR-01#########################################################
+BRN-RTR-01#show ip int brief
+Interface                  IP-Address      OK? Method Status                Protocol
+GigabitEthernet0/0         172.16.1.19     YES NVRAM  up                    up      
+GigabitEthernet0/1         unassigned      YES unset  up                    up      
+GigabitEthernet0/2         unassigned      YES unset  up                    up      
+GigabitEthernet0/3         unassigned      YES unset  up                    up      
+Loopback0                  unassigned      YES unset  up                    up      
+BRN-RTR-01#########################################################
+BRN-RTR-01#!

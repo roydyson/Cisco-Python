@@ -1,6 +1,4 @@
-
-++++++++++++++++++++++++++++++++++++
-s product immediately.
+mmediately.
 
 A summary of U.S. laws governing Cisco cryptographic products may be found at:
 http://www.cisco.com/wwl/export/crypto/tool/stqrg.html
@@ -221,7 +219,7 @@ end
 
 BRN-RTR-02#########################################################
 BRN-RTR-02#show clock
-*15:40:38.819 UTC Thu Apr 25 2019
+*15:53:26.756 UTC Thu Apr 25 2019
 BRN-RTR-02#########################################################
 BRN-RTR-02#show ip route
 Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
@@ -287,36 +285,36 @@ Probes profiling:
 
      Invoked     TotalCycle      AvgCycles Caller PC / Name
   ---------------------------------------------------------------------
-    68065647  5231325017933          76857 0x002876E1/ISR raise level
-    68065506 11054692498299         162412 0x00287749/ISR reset level
-         147       33555018         228265 0x00277254/ISR set level
-    41437016   128597946896           3103 0x0015AC9F/PIC 0 (timer)
-    41437016    78103710549           1884 0x0015A0D5/PC ISR clock tick
+    69588556  5395215490787          77530 0x002876E1/ISR raise level
+    69588414 11355625220997         163182 0x00287749/ISR reset level
+         155       34686223         223782 0x00277254/ISR set level
+    42204885   131613589045           3118 0x0015AC9F/PIC 0 (timer)
+    42204885    79884205886           1892 0x0015A0D5/PC ISR clock tick
            2     1525435413      762717706 0x0021FFEA/Buffer init
            1    74925533900    74925533900 0x001592EE/Filesys pre init
            3    39269697359    13089899119 0x001613DA/PCI discover
-       41676   109443973639        2626067 0x00162695/VirtIO req
-      380878      397146435           1042 0x00162F34/VirtIO ring alloc
-       41676   106229611701        2548939 0x0016314A/VirtIO ring write
-       41676   106165701609        2547406 0x001658B8/VirtIO ring write done
-       41676  1448134887706       34747453 0x001627B6/VirtIO queue read
-       41676  1315723436234       31570290 0x001627B6/VirtIO queue read wait
-       41676   132349205832        3175669 0x00165B57/VirtIO ring read done
-       45242   382005845779        8443610 0x0015B69F/PIC 10 (pci)
+       41678   109444211539        2625946 0x00162695/VirtIO req
+      380884      397148364           1042 0x00162F34/VirtIO ring alloc
+       41678   106229804958        2548822 0x0016314A/VirtIO ring write
+       41678   106165893949        2547288 0x001658B8/VirtIO ring write done
+       41678  1448234705540       34748181 0x001627B6/VirtIO queue read
+       41678  1315791783809       31570415 0x001627B6/VirtIO queue read wait
+       41678   132380674642        3176272 0x00165B57/VirtIO ring read done
+       45351   382600176643        8436422 0x0015B69F/PIC 10 (pci)
            1    24266532346    24266532346 0x0112A50C/PD interface init
            1    39477691306    39477691306 0x03DE2590/Interface init
            1       51245301       51245301 0x0112A82D/Filesys init
-       60254   433356580284        7192162 0x0015B79F/PIC 11 (pci)
+       64654   465357543901        7197660 0x0015B79F/PIC 11 (pci)
            1      183009947      183009947 0x0112A6F9/Line init
-      407457   301670359993         740373 0x03DEADD0/AUX/CON poller
-      407457   146742206627         360141 0x0013196D/TTY read
-         665     6655968079       10008974 0x0015BB9F/PIC 15 (harddisk)
+      415007   308096456519         742388 0x03DEADD0/AUX/CON poller
+      415007   149810453451         360982 0x0013196D/TTY read
+         698     7069129498       10127692 0x0015BB9F/PIC 15 (harddisk)
            1  1896286666236  1896286666236 0x03DEADD0/Code sign
          315     8818396732       27994910 0x0013196D/TTY read thre
            1     9221926218     9221926218 0x011E3941/E1000 BIA record
-      374655  1437534487390        3836955 0x03DEADD0/e1000 sw poller
-      946688              0              0 0x00000000/VIRTIO ack
-          10       63762510        6376251 0x0015ED7F/PC profiling
+      381475  1468327835223        3849080 0x03DEADD0/e1000 sw poller
+      969412              0              0 0x00000000/VIRTIO ack
+          12       75714753        6309562 0x0015ED7F/PC profiling
 
 % CPU profiling needs to be enabled via;
     'test platform profile start'
@@ -512,7 +510,7 @@ Total physical DRAM 522497K bytes
 
 BRN-RTR-02#########################################################
 BRN-RTR-02#show clock
-*15:40:40.262 UTC Thu Apr 25 2019
+*15:53:28.247 UTC Thu Apr 25 2019
 BRN-RTR-02#########################################################
 BRN-RTR-02#dir all-filesystems
 Directory of flash0:/
@@ -619,7 +617,7 @@ GigabitEthernet0/0 is up, line protocol is up
   Description: OOB Management
   Internet address is 172.16.1.20/24
   MTU 1500 bytes, BW 1000000 Kbit/sec, DLY 10 usec, 
-     reliability 252/255, txload 1/255, rxload 1/255
+     reliability 251/255, txload 1/255, rxload 1/255
   Encapsulation ARPA, loopback not set
   Keepalive set (10 sec)
   Full Duplex, Auto Speed, link type is auto, media type is RJ45
@@ -631,13 +629,13 @@ GigabitEthernet0/0 is up, line protocol is up
   Queueing strategy: fifo
   Output queue: 0/40 (size/max)
   5 minute input rate 3000 bits/sec, 2 packets/sec
-  5 minute output rate 2000 bits/sec, 2 packets/sec
-     30279 packets input, 5168524 bytes, 0 no buffer
-     Received 1226 broadcasts (0 IP multicasts)
-     7349 runts, 0 giants, 0 throttles 
-     7349 input errors, 0 CRC, 0 frame, 0 overrun, 0 ignored
+  5 minute output rate 3000 bits/sec, 3 packets/sec
+     32390 packets input, 5366519 bytes, 0 no buffer
+     Received 1232 broadcasts (0 IP multicasts)
+     8895 runts, 0 giants, 0 throttles 
+     8895 input errors, 0 CRC, 0 frame, 0 overrun, 0 ignored
      0 watchdog, 0 multicast, 0 pause input
-     30549 packets output, 3526278 bytes, 0 underruns
+     34146 packets output, 3975013 bytes, 0 underruns
      0 output errors, 0 collisions, 3 interface resets
      6 unknown protocol drops
      0 babbles, 0 late collision, 0 deferred
@@ -653,19 +651,19 @@ GigabitEthernet0/1 is up, line protocol is up
   Full Duplex, Auto Speed, link type is auto, media type is RJ45
   output flow-control is unsupported, input flow-control is unsupported
   ARP type: ARPA, ARP Timeout 04:00:00
-  Last input 00:00:08, output 00:00:06, output hang never
+  Last input 00:00:15, output 00:00:04, output hang never
   Last clearing of "show interface" counters never
   Input queue: 0/75/0/0 (size/max/drops/flushes); Total output drops: 0
   Queueing strategy: fifo
   Output queue: 0/40 (size/max)
   5 minute input rate 0 bits/sec, 0 packets/sec
   5 minute output rate 0 bits/sec, 0 packets/sec
-     737 packets input, 281534 bytes, 0 no buffer
+     751 packets input, 286882 bytes, 0 no buffer
      Received 0 broadcasts (0 IP multicasts)
      0 runts, 0 giants, 0 throttles 
      0 input errors, 0 CRC, 0 frame, 0 overrun, 0 ignored
      0 watchdog, 0 multicast, 0 pause input
-     4979 packets output, 553146 bytes, 0 underruns
+     5071 packets output, 563275 bytes, 0 underruns
      0 output errors, 0 collisions, 3 interface resets
      0 unknown protocol drops
      0 babbles, 0 late collision, 0 deferred
@@ -681,19 +679,19 @@ GigabitEthernet0/2 is up, line protocol is up
   Full Duplex, Auto Speed, link type is auto, media type is RJ45
   output flow-control is unsupported, input flow-control is unsupported
   ARP type: ARPA, ARP Timeout 04:00:00
-  Last input 00:00:31, output 00:00:06, output hang never
+  Last input 00:00:11, output 00:00:04, output hang never
   Last clearing of "show interface" counters never
   Input queue: 0/75/0/0 (size/max/drops/flushes); Total output drops: 0
   Queueing strategy: fifo
   Output queue: 0/40 (size/max)
   5 minute input rate 0 bits/sec, 0 packets/sec
   5 minute output rate 0 bits/sec, 0 packets/sec
-     762 packets input, 291846 bytes, 0 no buffer
+     777 packets input, 297591 bytes, 0 no buffer
      Received 0 broadcasts (0 IP multicasts)
      0 runts, 0 giants, 0 throttles 
      0 input errors, 0 CRC, 0 frame, 0 overrun, 0 ignored
      0 watchdog, 0 multicast, 0 pause input
-     4983 packets output, 554698 bytes, 0 underruns
+     5075 packets output, 564827 bytes, 0 underruns
      0 output errors, 0 collisions, 3 interface resets
      0 unknown protocol drops
      0 babbles, 0 late collision, 0 deferred
