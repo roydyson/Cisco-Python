@@ -51,8 +51,8 @@ for index in range(1, sheet.nrows):
 
     f = open("CFG_" + hostname + ".dun", "w")
     net_connect = ConnectHandler(**device)
-    qashow = net_connect.send_config_set(cmd)
+    output = net_connect.send_config_set(cmd)
     print(qashow)
 
-    f.write(qashow)
+    f.write(output)
     f.close()
