@@ -24,9 +24,9 @@ print(config_gen.render(config_data))
 
     #f = open("SHOW_" + hostname + ".py", "w")
 
-f = open("syslog" + ".py", "w")
-n = open("syslog" + ".j2", "w")
-o = open("syslog" + ".yaml", "w")
+f = open("vty_ssh" + ".py", "w")
+n = open("vty_ssh" + ".j2", "w")
+o = open("vty_ssh" + ".yaml", "w")
 f.write(config_gen.render(config_data))
 f.close()
 o.write('example_1: example')
