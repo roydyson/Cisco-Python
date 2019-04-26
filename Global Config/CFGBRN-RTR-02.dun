@@ -1,0 +1,46 @@
+config term
+Enter configuration commands, one per line.  End with CNTL/Z.
+BRN-RTR-02(config)#no ip finger
+BRN-RTR-02(config)#service password-encryption
+BRN-RTR-02(config)#no ip bootp server
+BRN-RTR-02(config)#no mop enabled
+                          ^
+% Invalid input detected at '^' marker.
+
+BRN-RTR-02(config)#no ip domain-lookup
+BRN-RTR-02(config)#no service pad
+BRN-RTR-02(config)#no ip http server
+BRN-RTR-02(config)#no ip http secure-server
+BRN-RTR-02(config)#no service config
+BRN-RTR-02(config)#no logging console
+BRN-RTR-02(config)#no logging monitor
+BRN-RTR-02(config)#logging buffered 16384 6
+BRN-RTR-02(config)#service timestamps log datetime msec show-timezone
+BRN-RTR-02(config)#clock timezone EDT -5
+BRN-RTR-02(config)#ip options drop
+BRN-RTR-02(config)#no ip source-route
+BRN-RTR-02(config)#service timestamps log datetime msec localtime show-timezone
+BRN-RTR-02(config)#service tcp-keepalives-in
+BRN-RTR-02(config)#service tcp-keepalives-out
+BRN-RTR-02(config)#
+BRN-RTR-02(config)#ip scp server enable
+BRN-RTR-02(config)#ip ssh authentication-retries 5
+BRN-RTR-02(config)#ip ssh time-out 120
+BRN-RTR-02(config)#
+BRN-RTR-02(config)#no service password-recovery
+                                       ^
+% Invalid input detected at '^' marker.
+
+BRN-RTR-02(config)#line con 0
+BRN-RTR-02(config-line)# exec-timeout 5 0
+BRN-RTR-02(config-line)#line vty 0 4
+BRN-RTR-02(config-line)# exec-timeout 5 0
+BRN-RTR-02(config-line)#
+BRN-RTR-02(config-line)#line aux 0
+BRN-RTR-02(config-line)#transport input none
+BRN-RTR-02(config-line)#transport output none
+BRN-RTR-02(config-line)#no exec
+BRN-RTR-02(config-line)#exec-timeout 0 1
+BRN-RTR-02(config-line)#no password
+BRN-RTR-02(config-line)#end
+BRN-RTR-02#

@@ -1,0 +1,5 @@
+config term
+Enter configuration commands, one per line.  End with CNTL/Z.
+HQ-RTR-1(config)#logging host 3.3.3.3
+HQ-RTR-1(config)#end
+HQ-RTR-1#

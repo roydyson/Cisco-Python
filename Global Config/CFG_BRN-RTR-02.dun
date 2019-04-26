@@ -1,0 +1,9 @@
+config term
+Enter configuration commands, one per line.  End with CNTL/Z.
+BRN-RTR-02(config)#line con 0
+BRN-RTR-02(config-line)# exec-timeout 4 30
+BRN-RTR-02(config-line)#
+BRN-RTR-02(config-line)#line vty 0 4
+BRN-RTR-02(config-line)# exec-timeout 4 30
+BRN-RTR-02(config-line)#end
+BRN-RTR-02#

@@ -1,16 +1,24 @@
 from netmiko import ConnectHandler
-from datetime import datetime
-from netmiko.ssh_exception import AuthenticationException, NetMikoTimeoutException
-import xlrd
-from pprint import pprint
+from jinja2 import Environment, FileSystemLoader
+from netmiko import ConnectHandler
+import time
+#Import YAML module
 import yaml
+from datetime import datetime
+import xlrd
+#Load data from YAML into Python dictionary
+config_data = yaml.load(open('./session_timeout.yaml'))
 
-def main():
-    today = datetime.now()
+#Load Jinja2 template
+env = Environment(loader = FileSystemLoader('./'), trim_blocks=True, lstrip_blocks=True)
+session_timeout = env.get_template('session_timeout.j2')
 
-with open('global_cmds.cfg', 'r') as f:
-    global_cmds = f.read().rstrip()
-print(global_cmds)
+#Render the template with data and print the output
+print(session_timeout.render(config_data))
+#dsw1cfg = open( "newvlan_dsw1" + "_.cfg", "w")
+(session_timeout.render(config_data))
+
+
 
 workbook = xlrd.open_workbook(r"c:\GitHub\Cisco-Python\automation-lab.xlsx")
 
@@ -37,12 +45,9 @@ for index in range(1, sheet.nrows):
 
     print ("logging into device: ", hostname , str( datetime.now()))
 
-
-
-#for equipment in all_devices:
     f = open("CFG_" + hostname + ".dun", "w")
     net_connect = ConnectHandler(**device)
-    qashow = net_connect.send_config_set(global_cmds)
+    qashow = net_connect.send_config_set(session_timeout.render(config_data))
     print(qashow)
 
     f.write(qashow)
